@@ -29,15 +29,6 @@
           $("textarea").select();
           document.execCommand("copy");
         });
-        $.ajax({
-          url: "/api/dd",
-          type: "POST",
-          contentType: "application/json",
-          data: dd,
-          success: function (data) {
-            window.localStorage.__dd = 1;
-          },
-        });
       })();
     </script>
   </body>
