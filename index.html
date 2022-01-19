@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    Example
+    <div id="logs"></div>
+    <div id="json"></div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="dumpDD.js"></script>
+    <script>
+      (async () => {
+        const logs = document.getElementById("logs");
+        const json = document.getElementById("json");
+        const log = (logtext) => {
+          logs.innerHTML += `<br><span>${logtext}</span><br>`;
+        };
+        const startTime = new Date();
+        log("Identifying started");
+        const dd = await window["__$dd"]();
+        const elapsedTime = new Date() - startTime;
+        log(`took ${elapsedTime}ms`);
+        json.innerHTML = `<button>Click to copy</button><textarea style="width: 100%; height: 400px;">${dd}</textarea>`;
+        $("button").click(function () {
+          $("textarea").select();
+          document.execCommand("copy");
+        });
+        $.ajax({
+          url: "/api/dd",
+          type: "POST",
+          contentType: "application/json",
+          data: dd,
+          success: function (data) {
+            window.localStorage.__dd = 1;
+          },
+        });
+      })();
+    </script>
+  </body>
+</html>
