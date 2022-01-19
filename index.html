@@ -11,14 +11,17 @@
     <div id="logs"></div>
     <div id="json"></div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+      const log = (logtext) => {
+        logs.innerHTML += `<br><span>${logtext}</span><br>`;
+      };
+    </script>
     <script src="dumpDD.js"></script>
     <script>
       (async () => {
         const logs = document.getElementById("logs");
         const json = document.getElementById("json");
-        const log = (logtext) => {
-          logs.innerHTML += `<br><span>${logtext}</span><br>`;
-        };
+
         const startTime = new Date();
         log("Identifying started");
         const dd = await window["__$dd"]();

@@ -4366,6 +4366,7 @@ window["__$dd"] = async () => {
           }
 
           success = true;
+          log(`voices length: ${data.length}`);
 
           const voices = data.map((e) => ({
             default: e.default,
